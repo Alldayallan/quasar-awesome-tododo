@@ -1,11 +1,14 @@
 <template>
   <q-page class="q-pa-md">
-    <q-list bordered>
+    <q-list
+      separator 
+      bordered>
 
       <q-item
-        v-for="task in tasks"
-        :key="task.id"
+        v-for="(task, key) in tasks"
+        :key="key"
         @click="task.completed = !task.completed"
+        :class="!task.completed ? 'bg-orange-1' : 'bg-green-1'"
         clickable
         v-ripple>
         <q-item-section side top>
@@ -13,7 +16,10 @@
         </q-item-section>
 
         <q-item-section>
-          <q-item-label>{{ task.name }}</q-item-label>
+          <q-item-label
+            :class="{ 'text-strikethrough' : task.completed }">
+            {{ task.name }}
+            </q-item-label>
         </q-item-section>
 
         <q-item-section side>
@@ -45,33 +51,11 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
-    data() {
-      return {
-        tasks: [
-          {
-            id: 1,
-            name: 'Go to shop',
-            completed: false,
-            dueDate: '2019/05/12',
-            dueTime: '18:30'
-          },
-          {
-            id: 2,
-            name: 'Get beer',
-            completed: false,
-            dueDate: '2019/05/13',
-            dueTime: '14:00'
-          },
-          {
-            id: 3,
-            name: 'Get whiskey',
-            completed: false,
-            dueDate: '2019/05/14',
-            dueTime: '16:00'
-          }
-        ]
-      }
+    computed: {
+      ...mapGetters('tasks', ['tasks'])
     }
   }
 </script>
