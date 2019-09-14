@@ -11,22 +11,30 @@
         icon="close" />
     </q-card-section>
 
-    <q-card-section>
+    <q-form @submit.prevent="submitForm">
+      <q-card-section>
       <div class="row q-mb-sm">
         <q-input 
-          outlined 
+          outlined
+          clearable 
           v-model="taskToSubmit.name"
+          :rules="[val => !!val || 'Field is required']"
+          autofocus
+          ref="name"
           label="Task name" 
           class="col" />
-       </div>
+      </div>
        
       <div class="row q-mb-sm">
-        <q-input 
-          outlined 
+        <q-input
+          outlined
+          clearable 
           label="Due date"
           v-model="taskToSubmit.dueDate">
           <template v-slot:append>
-            <q-icon name="event" class="cursor-pointer">
+            <q-icon
+              name="event" 
+              class="cursor-pointer">
               <q-popup-proxy ref="qDateProxy" transition-show="scale" transition-hide="scale">
                 <q-date v-model="taskToSubmit.dueDate" @input="() => $refs.qDateProxy.hide()" />
               </q-popup-proxy>
@@ -35,11 +43,15 @@
         </q-input>
       </div>
 
-      <div class="row q-mb-sm">
+      <div
+        v-if="taskToSubmit.dueDate" 
+        class="row q-mb-sm">
         <q-input 
           outlined
+          clearable
           label="Due time" 
-          v-model="taskToSubmit.dueTime">
+          v-model="taskToSubmit.dueTime"
+          class="col">
           <template v-slot:append>
             <q-icon name="access_time" class="cursor-pointer">
               <q-popup-proxy transition-show="scale" transition-hide="scale">
@@ -54,15 +66,18 @@
 
     <q-card-actions align="right">
       <q-btn 
-        flat 
         label="Save" 
-        color="primary" 
-        v-close-popup />
-    </q-card-actions>
+        color="primary"
+        type="submit" />
+    </q-card-actions>  
+  </q-form>
+
+    
   </q-card>
 </template>
 
 <script>
+  import { mapActions } from 'vuex'
   export default {
     data() {
       return {
@@ -72,6 +87,19 @@
           dueTime: '',
           completed: false
         }
+      }
+    },
+    methods: {
+      ...mapActions('tasks', ['addTask']),
+      submitForm() {
+        this.$refs.name.validate()
+        if (!this.$refs.name.hasError) {
+          this.submitTask()
+        }
+      },
+      submitTask() {
+        this.addTask(this.taskToSubmit)
+        this.$emit('close')
       }
     }
   }
