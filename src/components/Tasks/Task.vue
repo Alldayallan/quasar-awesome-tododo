@@ -59,7 +59,7 @@
   export default {
     props: ['task', 'id'],
     methods: {
-      ...mapActions('tasks', ['updateTask']),
+      ...mapActions('tasks', ['updateTask', 'deleteTask']),
       promptToDelete(id) {
         this.$q.dialog({
           title: 'Confirm',
@@ -67,7 +67,7 @@
           cancel: true,
           persistent: true
         }).onOk(() => {
-          console.log('deleted')
+          this.deleteTask(id)
         })
       }
     }
