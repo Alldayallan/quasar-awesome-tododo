@@ -4,7 +4,7 @@
       <q-toolbar>
         
         <q-toolbar-title class="absolute-center">
-          Awesome Todo
+          Todo Due
         </q-toolbar-title>
 
       </q-toolbar>
@@ -95,4 +95,5 @@
       color: white !important;
     }
   }
+
 </style>
