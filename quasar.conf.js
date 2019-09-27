@@ -60,12 +60,14 @@ module.exports = function (ctx) {
         'QPopupProxy',
         'QTime',
         'QForm',
-        'QBanner'
+        'QBanner',
+        'QSelect'
       ],
 
       directives: [
         'Ripple',
-        'ClosePopup'
+        'ClosePopup',
+        'TouchHold'
       ],
 
       // Quasar plugins
