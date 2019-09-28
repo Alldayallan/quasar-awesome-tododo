@@ -107,11 +107,11 @@
         return date.formatDate(value, 'MMM Do')
       },
       searchHighlight(value, search) {
-        console.log('value', value);
-        console.log('search', search);
         if (search) {
-          let searchRegExp = new RegExp(search, 'i')
-          return value.replace(searchRegExp, '<span class="bg-yellow-6">' + search + '</span>')
+          let searchRegExp = new RegExp(search, 'ig')
+          return value.replace(searchRegExp, (match) => {
+            return '<span class="bg-yellow-6">' + match + '</span>'
+          })
         }
         return value
       }

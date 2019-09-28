@@ -8,16 +8,18 @@
 
     <p v-if="search && !Object.keys(tasksTodo).lenght && !Object.keys(tasksCompleted).length">No search results.</p>
 
-    <no-tasks
+    <div class="relative-position">
+      <no-tasks
       v-if="!Object.keys(tasksTodo).length && !search"></no-tasks>
     
-    <tasks-todo
-      v-if="Object.keys(tasksTodo).length"
-      :tasksTodo="tasksTodo" />
+      <tasks-todo
+        v-if="Object.keys(tasksTodo).length"
+        :tasksTodo="tasksTodo" />
 
-    <tasks-completed
-      v-if="Object.keys(tasksCompleted).length"
-      :tasksCompleted="tasksCompleted" />
+      <tasks-completed
+        v-if="Object.keys(tasksCompleted).length"
+        :tasksCompleted="tasksCompleted" />
+    </div>
 
     <div class="absolute-bottom text-center q-mb-lg">
       <q-btn
