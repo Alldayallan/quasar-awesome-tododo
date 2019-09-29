@@ -24,7 +24,7 @@
     <q-drawer
       v-model="leftDrawerOpen"
       :breakpoint="767"
-      :width="250"
+      :width="150"
       show-if-above
       bordered
       content-class="bg-primary"
