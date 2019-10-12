@@ -2,7 +2,7 @@
   <q-layout view="hHh lpR fFf">
     <q-header elevated>
       <q-toolbar>
-        
+
         <q-toolbar-title class="absolute-center">
           To Due Due
         </q-toolbar-title>
@@ -30,6 +30,7 @@
 
     <q-drawer
       v-model="leftDrawerOpen"
+      show-if-above
       :breakpoint="767"
       :width="250"
       bordered
@@ -69,7 +70,7 @@
     name: 'MyLayout',
     data() {
       return {
-        leftDrawerOpen: this.$q.platform.is.desktop,
+        leftDrawerOpen: this.$q.platform.is.mobile,
         navs: [
           {
             label: 'Todo',
@@ -98,6 +99,7 @@
   }
 
   .q-drawer {
+    height: 100%;
     .q-router-link--exact-active {
       color: white !important;
     }
