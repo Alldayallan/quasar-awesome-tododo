@@ -4,8 +4,15 @@
       <q-toolbar>
         
         <q-toolbar-title class="absolute-center">
-          Todo Due
+          To Due Due
         </q-toolbar-title>
+
+        <q-btn
+          to="/auth" 
+          flat 
+          icon-right="account_circle" 
+          label="Login"
+          class="absolute-right" />
 
       </q-toolbar>
     </q-header>
@@ -24,8 +31,7 @@
     <q-drawer
       v-model="leftDrawerOpen"
       :breakpoint="767"
-      :width="150"
-      show-if-above
+      :width="250"
       bordered
       content-class="bg-primary"
     >
@@ -49,6 +55,7 @@
         
       </q-list>
     </q-drawer>
+
     <q-page-container>
       <router-view />
     </q-page-container>
