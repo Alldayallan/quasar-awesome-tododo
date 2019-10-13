@@ -13,10 +13,10 @@
         v-model="formData.email"
         :rules="[ val => isValidEmailAddress(val) || 'Please enter a valid email address.']"
         ref="email"
-        lazy-rules 
-        outlined 
-        class="col" 
-        label="Email" 
+        lazy-rules
+        outlined
+        class="col"
+        label="Email"
         stack-label />
     </div>
     <div class="row q-mb-md">
@@ -25,20 +25,20 @@
         :rules="[ val => val.length >= 6 || 'Please enter at least 6 characters.']"
         ref="password"
         lazy-rules
-        type="password" 
-        outlined 
-        class="col" 
-        label="Password" 
+        type="password"
+        outlined
+        class="col"
+        label="Password"
         stack-label />
     </div>
     <div class="row">
       <q-space />
-      <q-btn 
-        color="primary" 
+      <q-btn
+        color="primary"
         :label="tab"
         type="submit" />
     </div>
-  </form>  
+  </form>
 </template>
 
 <script>
@@ -55,7 +55,7 @@
       }
     },
     methods: {
-      ...mapActions('auth', ['registerUser']),
+      ...mapActions('auth', ['registerUser', 'loginUser']),
       isValidEmailAddress(email) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         return re.test(String(email).toLowerCase())
@@ -65,7 +65,7 @@
         this.$refs.password.validate()
         if (!this.$refs.email.hasError && !this.$refs.password.hasError) {
           if (this.tab == 'login') {
-            console.log('login the  user')
+            this.loginUser(this.formData)
           }
           else {
             this.registerUser(this.formData)

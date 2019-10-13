@@ -8,10 +8,19 @@
         </q-toolbar-title>
 
         <q-btn
-          to="/auth" 
-          flat 
-          icon-right="account_circle" 
+          v-if="!loggedIn"
+          to="/auth"
+          flat
+          icon-right="account_circle"
           label="Login"
+          class="absolute-right" />
+
+        <q-btn
+          v-else
+          @click="logoutUser"
+          flat
+          icon-right="account_circle"
+          label="Logout"
           class="absolute-right" />
 
       </q-toolbar>
@@ -23,7 +32,7 @@
           v-for="nav in navs"
           :key="nav.label"
           :to="nav.to"
-          :icon="nav.icon" 
+          :icon="nav.icon"
           :label="nav.label" />
       </q-tabs>
     </q-footer>
@@ -53,7 +62,7 @@
             <q-item-label>{{ nav.label }}</q-item-label>
           </q-item-section>
         </q-item>
-        
+
       </q-list>
     </q-drawer>
 
@@ -64,6 +73,7 @@
 </template>
 
 <script>
+  import { mapState, mapActions } from 'vuex'
   import { openURL } from 'quasar'
 
   export default {
@@ -85,7 +95,11 @@
         ]
       }
     },
+    computed: {
+      ...mapState('auth', ['loggedIn'])
+    },
     methods: {
+      ...mapActions('auth', ['logoutUser']),
       openURL
     }
   }
