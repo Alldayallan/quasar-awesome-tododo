@@ -6,8 +6,8 @@
     clickable
     v-ripple>
     <q-item-section side top>
-      <q-checkbox 
-      :value="task.completed" 
+      <q-checkbox
+      :value="task.completed"
       class="no-pointer-events" />
     </q-item-section>
 
@@ -23,18 +23,18 @@
       side>
       <div class="row">
         <div class="column justify-center">
-          <q-icon 
+          <q-icon
           name="event"
           size="18px"
           class="q-mr-xs" />
         </div>
           <div class="column">
             <q-item-label
-              class="row justify-end" 
+              class="row justify-end"
               caption>
               {{ task.dueDate | niceDate }}
             </q-item-label>
-            <q-item-label 
+            <q-item-label
               class="row justify-end"
               caption>
             <small>{{ taskDueTime }}</small>
@@ -49,22 +49,22 @@
           @click.stop="showEditTaskModal"
           flat
           round
-          dense 
-          color="primary" 
+          dense
+          color="primary"
           icon="edit" />
         <q-btn
           @click.stop="promptToDelete(id)"
           flat
           round
-          dense 
-          color="red" 
+          dense
+          color="red"
           icon="delete" />
-      </div> 
+      </div>
     </q-item-section>
 
     <q-dialog v-model="showEditTask">
-      <edit-task 
-      @close="showEditTask = false" 
+      <edit-task
+      @close="showEditTask = false"
       :task="task"
       :id="id" />
     </q-dialog>
@@ -85,7 +85,7 @@
     },
     computed: {
       ...mapState('tasks', ['search']),
-      ...mapGetters('settings', ['settings']), 
+      ...mapGetters('settings', ['settings']),
       taskDueTime() {
         if (this.settings.show12HourTimeFormat) {
           return date.formatDate(this.task.dueDate + ' ' + this.task.dueTime, 'h:mmA')
